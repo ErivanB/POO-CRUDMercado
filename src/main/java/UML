@@ -1,0 +1,157 @@
+Diagrama de Classes UML
+
+Model
+Gerente
+
+Atributos:
+nome: String
+login: String
+senha: String
+email: String (opcional)
+nisPis: String (opcional)
+Métodos:
+cadastrarGerente()
+autenticar(login: String, senha: String): boolean
+cadastroUsuario(tipo: String, dados: Map<String, String>): void
+cadastrarProduto(produto: Produto): void
+gerarRelatorioBalanço(mes: int, ano: int): void
+enviarCupom(cupom: Cupom): void
+
+Produto
+
+Atributos:
+codigo: String
+nome: String
+unidade: String
+valorCompra: double
+valorVenda: double
+quantidadeEstoque: int
+Métodos:
+atualizarEstoque(quantidade: int): void
+atualizarValorVenda(valor: double): void
+
+Cliente
+
+Atributos:
+nome: String
+cpf: String
+email: String (opcional)
+endereco: String (opcional)
+Métodos:
+cadastrarCliente()
+enviarEmail(cupom: Cupom): void
+
+Venda
+
+Atributos:
+cliente: Cliente
+produtos: List<Produto>
+dataHora: Date
+cupom: Cupom (opcional)
+Métodos:
+registrarVenda(): void
+emitirNota(): void
+
+Cupom
+
+Atributos:
+codigo: String
+percentualDesconto: double
+Métodos:
+gerarCupom()
+aplicarDesconto(valor: double): double
+
+View
+
+TelaCadastroGerente
+
+Métodos:
+exibir()
+obterDadosCadastro(): Map<String, String>
+TelaAutenticacao
+
+Métodos:
+exibir()
+obterCredenciais(): Map<String, String>
+TelaCadastroProduto
+
+Métodos:
+exibir()
+obterDadosProduto(): Map<String, String>
+TelaListagemProdutos
+
+Métodos:
+exibir()
+mostrarDetalhesProduto(produto: Produto)
+TelaDetalhesProduto
+
+Métodos:
+exibir()
+editarProduto(dados: Map<String, String>): void
+excluirProduto()
+TelaRegistroEntradaEstoque
+
+Métodos:
+exibir()
+obterDadosEntrada(): Map<String, String>
+TelaCadastroCliente
+
+Métodos:
+exibir()
+obterDadosCliente(): Map<String, String>
+TelaVenda
+
+Métodos:
+exibir()
+obterDadosVenda(): Map<String, String>
+TelaRelatorioBalanço
+
+Métodos:
+exibir()
+mostrarRelatorio(relatorio: String)
+TelaEnvioCupom
+
+Métodos:
+exibir()
+obterDadosCupom(): Map<String, String>
+Controller
+GerenteController
+
+Métodos:
+cadastrarGerente(dados: Map<String, String>): void
+autenticar(login: String, senha: String): boolean
+cadastrarProduto(dados: Map<String, String>): void
+gerarRelatorioBalanço(mes: int, ano: int): void
+enviarCupom(dados: Map<String, String>): void
+ProdutoController
+
+Métodos:
+atualizarEstoque(codigo: String, quantidade: int): void
+atualizarValorVenda(codigo: String, valor: double): void
+ClienteController
+
+Métodos:
+cadastrarCliente(dados: Map<String, String>): void
+enviarEmail(cupom: Cupom): void
+VendaController
+
+Métodos:
+registrarVenda(dados: Map<String, String>): void
+emitirNota(codigoVenda: String): void
+EstoqueController
+
+Métodos:
+registrarEntradaEstoque(dados: Map<String, String>): void
+CupomController
+
+Métodos:
+gerarCupom(dados: Map<String, String>): void
+aplicarDesconto(cupom: Cupom, valor: double): double
+Relacionamentos Entre Classes
+Gerente e Produto têm uma relação de composição, pois um gerente pode cadastrar produtos.
+Produto e Venda têm uma relação de associação, pois um produto pode ser parte de uma venda.
+Cliente e Venda têm uma relação de associação, pois uma venda é realizada para um cliente.
+Gerente e Cupom têm uma relação de associação, pois o gerente pode criar cupons.
+Venda e Cupom têm uma relação de associação, pois uma venda pode aplicar um cupom de desconto.
+TelaCadastroGerente, TelaAutenticacao, TelaCadastroProduto, TelaListagemProdutos, TelaDetalhesProduto, TelaRegistroEntradaEstoque, TelaCadastroCliente, TelaVenda, TelaRelatorioBalanço, e TelaEnvioCupom são responsáveis pela visualização e interação com o usuário.
+GerenteController, ProdutoController, ClienteController, VendaController, EstoqueController, e CupomController são responsáveis pelo controle das ações e interações com o modelo.
